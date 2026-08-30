@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Виртуальное окружение
+venv/
+.venv/
+ENV/
+env/
+
+# Pytest
+.pytest_cache/
+.allure_results/
+allure-report/
+htmlcov/
+.coverage
+coverage.xml
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
