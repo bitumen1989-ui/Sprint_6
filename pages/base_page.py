@@ -58,3 +58,17 @@ class BasePage:
         return WebDriverWait(self.driver, self.timeout).until(
             EC.url_contains(expected_text)
         )
+
+    def wait_for_title_not_empty(self):
+        """Дождаться появления заголовка страницы."""
+        return WebDriverWait(self.driver, self.timeout).until(
+            lambda driver: len(driver.title) > 0
+        )
+
+    def get_page_title(self):
+        """Получить заголовок текущей страницы."""
+        return self.driver.title
+
+    def execute_script(self, script, *args):
+        """Выполнить JavaScript код."""
+        return self.driver.execute_script(script, *args)

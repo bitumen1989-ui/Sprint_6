@@ -2,8 +2,6 @@ import allure
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 from url import QA_SCOOTER_URL
-from selenium.webdriver.support.wait import WebDriverWait
-import time
 
 
 @allure.epic("Главная страница")
@@ -43,14 +41,11 @@ class MainPage(BasePage):
         """Переключиться на следующую вкладку и дождаться загрузки."""
         self.switch_to_window(1)
         self.wait_for_url_contains("dzen.ru")
-        WebDriverWait(self.driver, 10).until(
-            lambda driver: len(driver.title) > 0
-        )
-        time.sleep(0.5)
+        self.wait_for_title_not_empty()
 
     @allure.step("Получить заголовок страницы")
     def get_page_title(self):
-        return self.driver.title
+        return self.get_page_title()
 
     @allure.step("Проверить отображение заголовка главной страницы")
     def check_displaying_of_main_header(self):

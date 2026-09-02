@@ -7,7 +7,6 @@ from locators.order_page_locators import (
     OrderIsCompletedWindow
 )
 from selenium.webdriver.common.by import By
-import time
 
 
 @allure.epic("Страница заказа")
@@ -45,7 +44,7 @@ class OrderPage(BasePage):
         
         with allure.step("Нажать кнопку 'Далее'"):
             self.click_element(FirstFormSection.BUTTON_NEXT)
-            time.sleep(1)
+            self.wait_for_element_visible(SecondFormSection.ORDER_PAGE_HEADER)
 
     @allure.step("Заполнить вторую часть формы (данные об аренде)")
     def data_entry_second_form(self, test_data):
@@ -55,13 +54,9 @@ class OrderPage(BasePage):
             attachment_type=allure.attachment_type.TEXT
         )
 
-        with allure.step("Ожидание загрузки второй формы"):
-            self.wait_for_element_visible(SecondFormSection.ORDER_PAGE_HEADER)
-            self.wait_for_element_visible(SecondFormSection.DATE_LIST_HIDDEN)
-
         with allure.step("Ввести дату доставки"):
             self.send_keys_to_element(SecondFormSection.DATE_LIST_HIDDEN, test_data['DELIVERY_DATE'])
-            self.driver.find_element(By.TAG_NAME, "body").click()
+            self.execute_script("document.body.click()")
 
         with allure.step("Выбрать период аренды"):
             self.click_element(SecondFormSection.RENTAL_PERIOD_LIST_HIDDEN)
